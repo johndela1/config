@@ -1,0 +1,14 @@
+[user]
+	name = John de la Garza
+	email = john@jjdev.com
+[alias]
+	co = checkout
+	s = status
+	b = branch
+	c = branch
+	d = diff --color
+	p = pull
+[push]
+	default = simple
+[core]
+	excludesfile = /home/john/.gitignore
