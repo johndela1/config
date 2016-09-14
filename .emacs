@@ -12,6 +12,7 @@
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+;(elpy-enable)
 ;(add-to-list 'load-path "~/org-mode")
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -31,34 +32,30 @@
 
 (add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
 
+(custom-set-variables
+ '(help-at-pt-timer-delay 0.9)
+      '(help-at-pt-display-when-idle '(flymake-overlay)))
 
-(require 'jedi)
-(add-to-list 'ac-sources 'ac-source-jedi-direct)
-
-(defvar jedi-config:with-virtual-env nil)
-(defvar jedi-config:vca-root-sentinel ".git")
-(defvar jedi-config:python-module-sentinel "__init__.py")
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
-
-(defun jedi-config:setup-keys ()
-  (local-set-key (kbd "C-.") 'jedi:goto-definition)
-  (local-set-key (kbd "C-,") 'jedi:goto-definition-pop-marker)
-  (local-set-key (kbd "M-?") 'jedi:show-doc)
-  (local-set-key (kbd "M-/") 'jedi:get-in-function-call))
-(add-hook 'python-mode-hook 'jedi-config:setup-keys)
-;; (add-hook 'python-mode-hook
-;; 	  '(lambda ()
-;; 	     (local-set-key (kbd "C-.") 'jedi:jump-to-definition)
-;; 	     (local-set-key (kbd "C-,") 'jedi:jump-back)
-;; 	     (local-set-key (kbd "C-c d") 'jedi:show-doc)
-;; 	     (local-set-key (kbd "C-<tab>") 'jedi:complete)))
+;; (setq jedi:setup-keys t)
+;; (require 'jedi)
+;; (add-to-list 'ac-sources 'ac-source-jedi-direct)
+;; (defvar jedi-config:with-virtual-env "/home/john/venv3-head")
+;; (defvar jedi-config:vca-root-sentinel ".git")
+;; (defvar jedi-config:python-module-sentinel "__init__.py")
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:complete-on-dot t)
 
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (ido-mode 1)
 
-
-(add-hook 'python-mode-hook (lambda ()
-			      (require 'sphinx-doc)
-			      (sphinx-doc-mode t)))
+(add-hook 'before-save-hook 'gofmt-before-save)
+(add-to-list 'load-path "/home/john/go/src/github.com/dougm/goflymake")
+(require 'go-flymake)
+(require 'go-flycheck)
+(add-hook 'go-mode-hook (lambda ()
+			  (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)))
+(add-hook 'go-mode-hook (lambda ()
+			  (local-set-key (kbd "C-c i") 'go-goto-imports)))
+(add-hook 'go-mode-hook (lambda ()
+			  (local-set-key (kbd "M-.") 'godef-jump)))
