@@ -6,31 +6,39 @@
 [[ $- != *i* ]] && return
 
 PS1='[\u@\h \W]\$ '
-PS1='\W $ '
-alias ls='ls --color=auto'
+
 alias a='alsamixer'
 alias e='emacs -nw'
-alias p='mpg123 --list ./pl -z  -C'
-alias mpg123='mpg123 -C'
+alias j=jobs
+alias l='ls -gtr'
+alias ls='ls --color=auto'
+alias n='emacs -nw  $HOME/notes/notes.org'
+alias sc='screen'
+alias s='screen -r'
+alias vi=vim
 alias wn='play -n synth whitenoise'
-alias l='ls -ltr'
-alias n='cd ~/orgmode; git pull; e notes.org; git status | grep modified.*notes\.org > /dev/null  &&  (git add notes.org; git commit -m "token message "; git push); cd -; 2>/dev/null'
-#alias n='cd ~/orgmode; e notes.org; cd -'
-# setxkbmap -layout us -option ctrl:nocaps 2>/dev/null
-# xmodmap ~/.xmodmap
+alias x=$HOME/xcape/run.sh
+
+alias rl='find . -type f | shuf >random_list'
+alias pp='mpg123 -C --list random_list'
+
+ff()
+{
+    find . -name \*$1\*
+}
 
 gg()
 {
-	lynx google.com/search?q="$1"
+    lynx google.com/search?q="$1"
 }
 
-export EDITOR='emacs -nw'
+. /usr/share/cdargs/cdargs-bash.sh
+. /usr/share/git/completion/git-completion.bash
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export EDITOR='vim'
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+export PATH=$HOME/local/bin:$PATH
 
-# if [ -z "$SSH_AUTH_SOCK" ] ; then
-#   eval `ssh-agent -s`
-#   ssh-add
-# fi
-setxkbmap -option ctrl:nocaps
-export PATH=/home/john/local/bin:$PATH
+export PATH=$PATH:$(go env GOPATH)/bin
+
