@@ -50,7 +50,7 @@
 (ido-mode 1)
 
 (add-hook 'before-save-hook 'gofmt-before-save)
-(add-to-list 'load-path "/home/john/go/src/github.com/dougm/goflymake")
+(add-to-list 'load-path "/home/john/go_workspace/src/github.com/dougm/goflymake")
 (require 'go-flymake)
 (require 'go-flycheck)
 (add-hook 'go-mode-hook (lambda ()
@@ -59,3 +59,5 @@
 			  (local-set-key (kbd "C-c i") 'go-goto-imports)))
 (add-hook 'go-mode-hook (lambda ()
 			  (local-set-key (kbd "M-.") 'godef-jump)))
+
+
