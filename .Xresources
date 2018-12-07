@@ -1,15 +1,9 @@
-xterm*faceName: xft:monospace:pixelsize=54#58
-XTerm*eightBitInput:   false
-XTerm*eightBitOutput:  true
+XTerm*metaSendsEscape: true
+xterm*faceName: xft:monospace:pixelsize=56
+xterm*foreground: rgb:ff/10/40
+xterm*background: rgb:00/00/00
 
+Xft.dpi: 180
 
-!*VT100.Translations:	#override \
-!	<Key>Delete: string(0x04) \n\
-!	<Key>BackSpace: string(0x7F)
-!XTerm*ttyModes: erase ^?
-
-
-
-
-xterm*foreground: rgb:ff/10/0
-xterm*background: rgb:08/08/08
+!xterm*VT100.Translations: #override \
+!                 Ctrl <Key>V:    insert-selection(PRIMARY)
